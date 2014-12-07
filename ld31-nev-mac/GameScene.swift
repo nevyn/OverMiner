@@ -1,9 +1,16 @@
 import SpriteKit
 
 enum Layers : CGFloat {
+	case Background = 0.0
 	case World = 5.0
 	case Resource = 8.0
 	case Spawner = 10.0
+	case UI = 100.0
+}
+
+enum Categories : UInt32 {
+	case Resource = 1
+	case Exit = 2
 }
 
 let kGridSize = CGFloat(40.0)
@@ -66,11 +73,33 @@ class Resource : SKNode {
 		self.addChild(looks)
 		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
 		self.physicsBody!.friction = 1.0
+		self.physicsBody!.categoryBitMask = Categories.Resource.rawValue
 		self.zPosition = Layers.Resource.rawValue
 	}
-	required init?(coder aDecoder: NSCoder) {
-	    fatalError("init(coder:) has not been implemented")
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+class Exit : SKNode {
+	let looks: SKShapeNode
+	
+	class func makeLooks() -> SKShapeNode {
+		let looks = SKShapeNode(circleOfRadius: kGridSize/2)
+		looks.fillColor = SKColor.blackColor()
+		return looks
 	}
+	
+	override init() {
+		looks = Exit.makeLooks()
+		super.init()
+		self.addChild(looks)
+		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2)
+		self.physicsBody!.affectedByGravity = false
+		self.physicsBody!.mass = 1000000
+		self.physicsBody!.categoryBitMask = Categories.Exit.rawValue
+		self.physicsBody!.contactTestBitMask = Categories.Resource.rawValue
+		self.zPosition = Layers.World.rawValue
+	}
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 
 class Conveyor : SKNode {
@@ -137,7 +166,7 @@ class BuildExtractorTool : Tool {
 	
 	override func perform(game: GameScene, at: CGPoint) {
 		if game.buy(50) {
-			game.addChild(Extractor(p: at, totalValue: 1000, valuePerResource: 10))
+			game.level.addChild(Extractor(p: at, totalValue: 1000, valuePerResource: 10))
 		}
 	}
 }
@@ -152,8 +181,8 @@ class BuyConveyorTool : Tool {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func perform(game: GameScene, at: CGPoint) {
-		if game.buy(10) {
-			game.addChild(Conveyor(p:at))
+		if game.level.nodeAtPoint(at) == game.level && game.buy(10) {
+			game.level.addChild(Conveyor(p:at))
 		}
 	}
 }
@@ -199,8 +228,8 @@ class Toolbar : SKNode {
 	
 }
 
-class GameScene: SKScene {
-	var resources : Int = 100 {
+class GameScene: SKScene, SKPhysicsContactDelegate {
+	var resources : Int = 200 {
 		didSet {
 			resourceLabel.text = "\(resources)"
 		}
@@ -217,7 +246,19 @@ class GameScene: SKScene {
 	var toolbar: Toolbar!
 	let resourceLabel = SKLabelNode(fontNamed: "Superclarendon-Regular")
 	
+	var exit : Exit!
+	
+	let level = SKShapeNode(rectOfSize: CGSizeMake(19*kGridSize, 15*kGridSize))
+	
     override func didMoveToView(view: SKView) {
+		
+		self.backgroundColor = SKColor.blackColor()
+		
+		level.fillColor = SKColor.lightGrayColor()
+		level.position = CGPointMake(self.size.width/2 + 1*kGridSize, self.size.height/2)
+		level.zPosition = Layers.Background.rawValue
+		addChild(level)
+		
 		toolbar = Toolbar(game: self)
 		toolbar.position = CGPointMake(kGridSize/2+10, self.size.height-kGridSize/2-10)
 		addChild(toolbar)
@@ -226,25 +267,53 @@ class GameScene: SKScene {
 		resourceLabel.fontSize = 20
 		addChild(resourceLabel)
 		buy(0)
+		
+		exit = Exit()
+		exit.position = CGPointMake(40, 80)
+		self.level.addChild(exit)
+		
+		self.physicsWorld.contactDelegate = self
     }
     
     override func mouseDown(theEvent: NSEvent) {
-		let p = theEvent.locationInNode(self)
-		for node in self.nodesAtPoint(p) {
+		let pointInGame = theEvent.locationInNode(self)
+		for node in self.nodesAtPoint(pointInGame) as [SKNode] {
 			if let toolbar = node as? Toolbar {
 				toolbar.toolbarClick(theEvent.locationInNode(toolbar))
 				return
+			} else if node == level {
+				var pointInLevel = theEvent.locationInNode(self.level)
+				pointInLevel.x += (pointInLevel.x > 0) ? (kGridSize/2.0) : -(kGridSize/2.0)
+				pointInLevel.y += (pointInLevel.y > 0) ? (kGridSize/2.0) : -(kGridSize/2.0)
+				
+				let intGridSize = Int(kGridSize)
+				let gridCoordinate = CGPointMake(CGFloat(Int((pointInLevel.x)/kGridSize)), CGFloat(Int((pointInLevel.y)/kGridSize)))
+				let pointAlignedOnGrid = gridCoordinate*kGridSize
+				
+				println("point: \(pointInLevel) grid coordinate: \(gridCoordinate), point: \(pointAlignedOnGrid)")
+				
+				toolbar.activeTool().perform(self, at: pointAlignedOnGrid)
 			}
 		}
 		
-		let intGridSize = Int(kGridSize)
-		let pAlignedOnGrid = CGPointMake(CGFloat(Int((p.x + kGridSize/2)/kGridSize) * intGridSize), CGFloat(Int((p.y + kGridSize/2)/kGridSize) * intGridSize))
-		
-		toolbar.activeTool().perform(self, at: pAlignedOnGrid)
     }
+	
+	func didBeginContact(contact: SKPhysicsContact) {
+		if let resource = contact.bodyA.node as? Resource {
+			if let exit = contact.bodyB.node as? Exit {
+				resource.removeFromParent()
+				resources += resource.value
+			}
+		}
+	}
+
 	
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+}
+
+func *(p: CGPoint, m: CGFloat) -> CGPoint {
+	return CGPointMake(p.x*m, p.y*m)
 }
