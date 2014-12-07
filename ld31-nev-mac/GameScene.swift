@@ -198,9 +198,13 @@ class Toolbar : SKNode {
 }
 
 class GameScene: SKScene {
-	var resources = 100
+	var resources : Int = 100 {
+		didSet {
+			resourceLabel.text = "\(resources)"
+		}
+	}
 	func buy(cost: Int) -> Bool {
-		if resources - cost > 0 {
+		if resources - cost >= 0 {
 			resources -= cost
 			return true
 		} else {
@@ -209,11 +213,17 @@ class GameScene: SKScene {
 	}
 	
 	var toolbar: Toolbar!
+	let resourceLabel = SKLabelNode(fontNamed: "Superclarendon-Regular")
 	
     override func didMoveToView(view: SKView) {
 		toolbar = Toolbar(game: self)
 		toolbar.position = CGPointMake(30, self.size.height-30)
 		addChild(toolbar)
+		
+		resourceLabel.position = CGPointMake(self.size.width - 50, self.size.height - 30)
+		resourceLabel.fontSize = 20
+		addChild(resourceLabel)
+		buy(0)
     }
     
     override func mouseDown(theEvent: NSEvent) {
