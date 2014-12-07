@@ -202,7 +202,7 @@ class Toolbar : SKNode {
 		for tool in tools {
 			addChild(tool)
 			tool.position = pen
-			pen.y -= kGridSize + 9
+			pen.x += kGridSize + 9
 		}
 	}
 	func activeTool() -> Tool {
@@ -248,14 +248,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	var exit : Exit!
 	
-	let level = SKShapeNode(rectOfSize: CGSizeMake(19*kGridSize, 15*kGridSize))
+	let level = SKShapeNode(rectOfSize: CGSizeMake(20*kGridSize, 14*kGridSize))
 	
     override func didMoveToView(view: SKView) {
 		
 		self.backgroundColor = SKColor.blackColor()
 		
 		level.fillColor = SKColor.lightGrayColor()
-		level.position = CGPointMake(self.size.width/2 + 1*kGridSize, self.size.height/2)
+		level.position = CGPointMake(self.size.width/2, self.size.height/2 - 0.5*kGridSize)
 		level.zPosition = Layers.Background.rawValue
 		addChild(level)
 		
