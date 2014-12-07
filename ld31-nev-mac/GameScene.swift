@@ -6,6 +6,8 @@ enum Layers : CGFloat {
 	case Spawner = 10.0
 }
 
+let kGridSize = CGFloat(40.0)
+
 
 class Extractor : SKNode {
 	let looks : SKShapeNode
@@ -13,7 +15,7 @@ class Extractor : SKNode {
 	let valuePerResource: Int
 	
 	class func makeLooks() -> SKShapeNode {
-		let looks = SKShapeNode(rectOfSize: CGSizeMake(40, 40))
+		let looks = SKShapeNode(rectOfSize: CGSizeMake(kGridSize, kGridSize))
 		looks.fillColor = SKColor.blueColor()
 		return looks
 	}
@@ -57,12 +59,12 @@ class Resource : SKNode {
 	let value : Int
 
 	init(value: Int) {
-		looks = SKShapeNode(rectOfSize: CGSizeMake(10, 20))
+		looks = SKShapeNode(rectOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
 		looks.fillColor = SKColor.greenColor()
 		self.value = value
 		super.init()
 		self.addChild(looks)
-		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(10, 20))
+		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
 		self.physicsBody!.friction = 1.0
 		self.zPosition = Layers.Resource.rawValue
 	}
@@ -74,9 +76,9 @@ class Resource : SKNode {
 class Conveyor : SKNode {
 	let looks : SKShapeNode
 	class func makeLooks() -> SKShapeNode {
-		let looks = SKShapeNode(circleOfRadius: 20)
+		let looks = SKShapeNode(circleOfRadius: kGridSize/2)
 		looks.fillColor = SKColor.grayColor()
-		let line = SKShapeNode(rect: CGRectMake(0, 0, 20, 1))
+		let line = SKShapeNode(rect: CGRectMake(0, 0, kGridSize/2, 1))
 		line.fillColor = SKColor.lightGrayColor()
 		looks.addChild(line)
 		return looks
@@ -86,7 +88,7 @@ class Conveyor : SKNode {
 		super.init()
 		self.position = p
 		self.addChild(looks)
-		self.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2)
 		self.physicsBody!.affectedByGravity = false
 		self.physicsBody!.mass = 1000000
 		self.physicsBody!.friction = 1.0
@@ -105,7 +107,7 @@ class Conveyor : SKNode {
 }
 
 class Tool : SKNode {
-	let border = SKShapeNode(rectOfSize: CGSizeMake(48, 48))
+	let border = SKShapeNode(rectOfSize: CGSizeMake(kGridSize + 8, kGridSize + 8))
 	var active : Bool = false {
 		didSet {
 			border.strokeColor = active ? SKColor.magentaColor() : SKColor.whiteColor()
@@ -171,7 +173,7 @@ class Toolbar : SKNode {
 		for tool in tools {
 			addChild(tool)
 			tool.position = pen
-			pen.y -= 49
+			pen.y -= kGridSize + 9
 		}
 	}
 	func activeTool() -> Tool {
@@ -217,7 +219,7 @@ class GameScene: SKScene {
 	
     override func didMoveToView(view: SKView) {
 		toolbar = Toolbar(game: self)
-		toolbar.position = CGPointMake(30, self.size.height-30)
+		toolbar.position = CGPointMake(kGridSize/2+10, self.size.height-kGridSize/2-10)
 		addChild(toolbar)
 		
 		resourceLabel.position = CGPointMake(self.size.width - 50, self.size.height - 30)
@@ -235,7 +237,8 @@ class GameScene: SKScene {
 			}
 		}
 		
-		let pAlignedOnGrid = CGPointMake(CGFloat(Int((p.x + 20)/40) * 40), CGFloat(Int((p.y + 20)/40) * 40))
+		let intGridSize = Int(kGridSize)
+		let pAlignedOnGrid = CGPointMake(CGFloat(Int((p.x + kGridSize/2)/kGridSize) * intGridSize), CGFloat(Int((p.y + kGridSize/2)/kGridSize) * intGridSize))
 		
 		toolbar.activeTool().perform(self, at: pAlignedOnGrid)
     }
