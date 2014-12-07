@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05A8EF461A3412AF008483B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF451A3412AF008483B4 /* AppDelegate.swift */; };
+		05A8EF481A3412AF008483B4 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF471A3412AF008483B4 /* GameScene.swift */; };
+		05A8EF4A1A3412AF008483B4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 05A8EF491A3412AF008483B4 /* GameScene.sks */; };
+		05A8EF4C1A3412AF008483B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A8EF4B1A3412AF008483B4 /* Images.xcassets */; };
+		05A8EF4F1A3412AF008483B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05A8EF4D1A3412AF008483B4 /* MainMenu.xib */; };
+		05A8EF5B1A3412AF008483B4 /* ld31_nev_macTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05A8EF551A3412AF008483B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05A8EF381A3412AF008483B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05A8EF3F1A3412AF008483B4;
+			remoteInfo = "ld31-nev-mac";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ld31-nev-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05A8EF441A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05A8EF451A3412AF008483B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		05A8EF471A3412AF008483B4 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		05A8EF491A3412AF008483B4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		05A8EF4B1A3412AF008483B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		05A8EF4E1A3412AF008483B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ld31-nev-macTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05A8EF591A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ld31_nev_macTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05A8EF3D1A3412AF008483B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05A8EF511A3412AF008483B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05A8EF371A3412AF008483B4 = {
+			isa = PBXGroup;
+			children = (
+				05A8EF421A3412AF008483B4 /* ld31-nev-mac */,
+				05A8EF571A3412AF008483B4 /* ld31-nev-macTests */,
+				05A8EF411A3412AF008483B4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05A8EF411A3412AF008483B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */,
+				05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05A8EF421A3412AF008483B4 /* ld31-nev-mac */ = {
+			isa = PBXGroup;
+			children = (
+				05A8EF451A3412AF008483B4 /* AppDelegate.swift */,
+				05A8EF471A3412AF008483B4 /* GameScene.swift */,
+				05A8EF491A3412AF008483B4 /* GameScene.sks */,
+				05A8EF4B1A3412AF008483B4 /* Images.xcassets */,
+				05A8EF4D1A3412AF008483B4 /* MainMenu.xib */,
+				05A8EF431A3412AF008483B4 /* Supporting Files */,
+			);
+			path = "ld31-nev-mac";
+			sourceTree = "<group>";
+		};
+		05A8EF431A3412AF008483B4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05A8EF441A3412AF008483B4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05A8EF571A3412AF008483B4 /* ld31-nev-macTests */ = {
+			isa = PBXGroup;
+			children = (
+				05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */,
+				05A8EF581A3412AF008483B4 /* Supporting Files */,
+			);
+			path = "ld31-nev-macTests";
+			sourceTree = "<group>";
+		};
+		05A8EF581A3412AF008483B4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05A8EF591A3412AF008483B4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-mac" */;
+			buildPhases = (
+				05A8EF3C1A3412AF008483B4 /* Sources */,
+				05A8EF3D1A3412AF008483B4 /* Frameworks */,
+				05A8EF3E1A3412AF008483B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ld31-nev-mac";
+			productName = "ld31-nev-mac";
+			productReference = 05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		05A8EF531A3412AF008483B4 /* ld31-nev-macTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-macTests" */;
+			buildPhases = (
+				05A8EF501A3412AF008483B4 /* Sources */,
+				05A8EF511A3412AF008483B4 /* Frameworks */,
+				05A8EF521A3412AF008483B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05A8EF561A3412AF008483B4 /* PBXTargetDependency */,
+			);
+			name = "ld31-nev-macTests";
+			productName = "ld31-nev-macTests";
+			productReference = 05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05A8EF381A3412AF008483B4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Thirdcog;
+				TargetAttributes = {
+					05A8EF3F1A3412AF008483B4 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					05A8EF531A3412AF008483B4 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 05A8EF3F1A3412AF008483B4;
+					};
+				};
+			};
+			buildConfigurationList = 05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "ld31-nev-mac" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05A8EF371A3412AF008483B4;
+			productRefGroup = 05A8EF411A3412AF008483B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */,
+				05A8EF531A3412AF008483B4 /* ld31-nev-macTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05A8EF3E1A3412AF008483B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05A8EF4A1A3412AF008483B4 /* GameScene.sks in Resources */,
+				05A8EF4C1A3412AF008483B4 /* Images.xcassets in Resources */,
+				05A8EF4F1A3412AF008483B4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05A8EF521A3412AF008483B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05A8EF3C1A3412AF008483B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05A8EF481A3412AF008483B4 /* GameScene.swift in Sources */,
+				05A8EF461A3412AF008483B4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05A8EF501A3412AF008483B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05A8EF5B1A3412AF008483B4 /* ld31_nev_macTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05A8EF561A3412AF008483B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */;
+			targetProxy = 05A8EF551A3412AF008483B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		05A8EF4D1A3412AF008483B4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05A8EF4E1A3412AF008483B4 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05A8EF5C1A3412AF008483B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		05A8EF5D1A3412AF008483B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		05A8EF5F1A3412AF008483B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "ld31-nev-mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05A8EF601A3412AF008483B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "ld31-nev-mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		05A8EF621A3412AF008483B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ld31-nev-macTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ld31-nev-mac.app/Contents/MacOS/ld31-nev-mac";
+			};
+			name = Debug;
+		};
+		05A8EF631A3412AF008483B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ld31-nev-macTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ld31-nev-mac.app/Contents/MacOS/ld31-nev-mac";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "ld31-nev-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05A8EF5C1A3412AF008483B4 /* Debug */,
+				05A8EF5D1A3412AF008483B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05A8EF5F1A3412AF008483B4 /* Debug */,
+				05A8EF601A3412AF008483B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-macTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05A8EF621A3412AF008483B4 /* Debug */,
+				05A8EF631A3412AF008483B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05A8EF381A3412AF008483B4 /* Project object */;
+}
