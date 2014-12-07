@@ -105,7 +105,12 @@ class Conveyor : SKNode {
 }
 
 class Tool : SKNode {
-	let border = SKShapeNode(rectOfSize: CGSizeMake(46, 46))
+	let border = SKShapeNode(rectOfSize: CGSizeMake(48, 48))
+	var active : Bool = false {
+		didSet {
+			border.strokeColor = active ? SKColor.magentaColor() : SKColor.whiteColor()
+		}
+	}
 	override init() {
 		super.init()
 		border.fillColor = SKColor.clearColor()
@@ -124,7 +129,6 @@ class BuildExtractorTool : Tool {
 	override init() {
 		looks = Extractor.makeLooks()
 		super.init()
-		looks.position = CGPointMake(3, 3)
 		self.addChild(looks)
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -141,7 +145,6 @@ class BuyConveyorTool : Tool {
 	override init() {
 		looks = Conveyor.makeLooks()
 		super.init()
-		looks.position = CGPointMake(3, 3)
 		self.addChild(looks)
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -163,15 +166,33 @@ class Toolbar : SKNode {
 			BuildExtractorTool(),
 			BuyConveyorTool(),
 		]
+		tools[0].active = true
 		var pen = CGPointMake(0, 0)
 		for tool in tools {
 			addChild(tool)
 			tool.position = pen
-			pen.y -= 40
+			pen.y -= 49
 		}
+	}
+	func activeTool() -> Tool {
+		for tool in tools {
+			if tool.active == true {
+				return tool
+			}
+		}
+		fatalError("must be an active tool")
 	}
 	required init?(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
+	}
+	
+    func toolbarClick(p: CGPoint) {
+		for node in self.nodesAtPoint(p) {
+			if let tool = node as? Tool {
+				activeTool().active = false
+				tool.active = true
+			}
+		}
 	}
 	
 }
@@ -196,8 +217,15 @@ class GameScene: SKScene {
     }
     
     override func mouseDown(theEvent: NSEvent) {
-
-
+		let p = theEvent.locationInNode(self)
+		for node in self.nodesAtPoint(p) {
+			if let toolbar = node as? Toolbar {
+				toolbar.toolbarClick(theEvent.locationInNode(toolbar))
+				return
+			}
+		}
+		
+		toolbar.activeTool().perform(self, at: p)
     }
 	
     
