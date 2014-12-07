@@ -235,7 +235,9 @@ class GameScene: SKScene {
 			}
 		}
 		
-		toolbar.activeTool().perform(self, at: p)
+		let pAlignedOnGrid = CGPointMake(CGFloat(Int((p.x + 20)/40) * 40), CGFloat(Int((p.y + 20)/40) * 40))
+		
+		toolbar.activeTool().perform(self, at: pAlignedOnGrid)
     }
 	
     
