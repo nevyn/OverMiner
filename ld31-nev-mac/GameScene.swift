@@ -20,6 +20,7 @@ enum Tileset : UInt {
 enum Categories : UInt32 {
 	case Resource = 1
 	case Exit = 2
+	case ResourceDeath = 4
 }
 
 let kGridSize = CGFloat(40.0)
@@ -83,6 +84,7 @@ class Resource : SKNode {
 		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
 		self.physicsBody!.friction = 1.0
 		self.physicsBody!.categoryBitMask = Categories.Resource.rawValue
+		self.physicsBody!.contactTestBitMask = Categories.Exit.rawValue | Categories.ResourceDeath.rawValue
 		self.zPosition = Layers.Resource.rawValue
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -105,7 +107,6 @@ class Exit : SKNode {
 		self.physicsBody!.affectedByGravity = false
 		self.physicsBody!.mass = 1000000
 		self.physicsBody!.categoryBitMask = Categories.Exit.rawValue
-		self.physicsBody!.contactTestBitMask = Categories.Resource.rawValue
 		self.zPosition = Layers.World.rawValue
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -128,7 +129,7 @@ class Conveyor : SKNode {
 		self.addChild(looks)
 		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2)
 		self.physicsBody!.affectedByGravity = false
-		self.physicsBody!.mass = 1000000
+		self.physicsBody!.pinned = true
 		self.physicsBody!.friction = 1.0
 		self.zPosition = Layers.World.rawValue
 		
@@ -148,6 +149,10 @@ class SoftSand : SKSpriteNode {
 	convenience init(p: CGPoint) {
 		self.init(imageNamed: "soft_sand")
 		self.position = p
+		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize, kGridSize))
+		self.physicsBody!.affectedByGravity = false
+		self.physicsBody!.dynamic = false
+		self.physicsBody!.categoryBitMask = Categories.ResourceDeath.rawValue
 	}
 }
 
@@ -155,6 +160,10 @@ class HardSand : SKSpriteNode {
 	convenience init(p: CGPoint) {
 		self.init(imageNamed: "hard_sand")
 		self.position = p
+		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize, kGridSize))
+		self.physicsBody!.affectedByGravity = false
+		self.physicsBody!.dynamic = false
+		self.physicsBody!.categoryBitMask = Categories.ResourceDeath.rawValue
 	}
 }
 
@@ -162,6 +171,10 @@ class Stone : SKSpriteNode {
 	convenience init(p: CGPoint) {
 		self.init(imageNamed: "stone")
 		self.position = p
+		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize, kGridSize))
+		self.physicsBody!.affectedByGravity = false
+		self.physicsBody!.dynamic = false
+		self.physicsBody!.categoryBitMask = Categories.ResourceDeath.rawValue
 	}
 }
 
@@ -217,6 +230,9 @@ class Level : SKNode {
 			addChild(tile)
 			linearPosition += 1
 		}
+		
+		self.physicsBody = SKPhysicsBody(edgeLoopFromRect: CGRectMake(-CGFloat(w)*kGridSize/2, -CGFloat(h)*kGridSize/2, CGFloat(w)*kGridSize, CGFloat(h)*kGridSize))
+		self.physicsBody!.categoryBitMask = Categories.ResourceDeath.rawValue
 	}
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
@@ -406,11 +422,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		
     }
 	
-	func didBeginContact(contact: SKPhysicsContact) {
-		if let resource = contact.bodyA.node as? Resource {
-			if let exit = contact.bodyB.node as? Exit {
+	func didBeginContact(contact: SKPhysicsContact)
+	{
+		if let (resourceBody, other) = bodyMatchingPredicate(contact.bodyA, contact.bodyB, { (body: SKPhysicsBody) -> Bool in
+			return body.node is Resource
+		}) {
+			let resource = resourceBody.node as Resource
+			if let exit = other.node as? Exit {
 				resource.removeFromParent()
 				resources += resource.value
+			} else if other.categoryBitMask & Categories.ResourceDeath.rawValue > 0 {
+				resource.removeFromParent()
+				// play animation
 			}
 		}
 	}
@@ -420,6 +443,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+}
+
+func bodyMatchingPredicate(a: SKPhysicsBody, b: SKPhysicsBody, test: (SKPhysicsBody)->Bool) -> (SKPhysicsBody, SKPhysicsBody)? {
+	if test(a) {
+		return (a, b)
+	} else if test(b) {
+		return (b, a)
+	}
+	return nil
 }
 
 func *(p: CGPoint, m: CGFloat) -> CGPoint {
