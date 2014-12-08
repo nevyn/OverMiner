@@ -356,12 +356,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				return
 			} else if node == level {
 				var pointInLevel = theEvent.locationInNode(self.level)
-				pointInLevel.x += (pointInLevel.x > 0) ? (kGridSize/2.0) : -(kGridSize/2.0)
-				pointInLevel.y += (pointInLevel.y > 0) ? (kGridSize/2.0) : -(kGridSize/2.0)
 				
 				let intGridSize = Int(kGridSize)
 				let gridCoordinate = CGPointMake(CGFloat(Int((pointInLevel.x)/kGridSize)), CGFloat(Int((pointInLevel.y)/kGridSize)))
-				let pointAlignedOnGrid = gridCoordinate*kGridSize
+				let pointAlignedOnGrid = (gridCoordinate*kGridSize) + kGridSize/2
 				
 				println("point: \(pointInLevel) grid coordinate: \(gridCoordinate), point: \(pointAlignedOnGrid)")
 				
@@ -390,3 +388,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 func *(p: CGPoint, m: CGFloat) -> CGPoint {
 	return CGPointMake(p.x*m, p.y*m)
 }
+func +(p: CGPoint, m: CGFloat) -> CGPoint {
+	return CGPointMake(p.x+m, p.y+m)
+}
+
