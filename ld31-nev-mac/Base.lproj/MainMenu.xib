@@ -13,10 +13,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
-                <menuItem title="ld31-nev-mac" id="56">
-                    <menu key="submenu" title="ld31-nev-mac" systemMenu="apple" id="57">
+                <menuItem title="OverMiner" id="56">
+                    <menu key="submenu" title="OverMiner" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About ld31-nev-mac" id="58">
+                            <menuItem title="About OverMiner" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
@@ -35,7 +35,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide ld31-nev-mac" keyEquivalent="h" id="134">
+                            <menuItem title="Hide OverMiner" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-1" id="367"/>
                                 </connections>
@@ -54,7 +54,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit ld31-nev-mac" keyEquivalent="q" id="136">
+                            <menuItem title="Quit OverMiner" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>
@@ -100,7 +100,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="ld31-nev-mac" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+        <window title="LD31: OverMiner (by nevyn)" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
@@ -121,7 +121,7 @@
                 </constraints>
             </view>
         </window>
-        <customObject id="494" customClass="AppDelegate" customModule="ld31_nev_mac" customModuleProvider="target">
+        <customObject id="494" customClass="AppDelegate" customModule="OverMiner" customModuleProvider="target">
             <connections>
                 <outlet property="skView" destination="539" id="540"/>
                 <outlet property="window" destination="371" id="532"/>

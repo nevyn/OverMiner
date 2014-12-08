@@ -32,14 +32,14 @@
 		054207CA1A35607000C714B2 /* resourcedeath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = resourcedeath.sks; sourceTree = "<group>"; };
 		054207CB1A35607000C714B2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		0575FF521A351C2B00979EFE /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
-		05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ld31-nev-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05A8EF401A3412AF008483B4 /* OverMiner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverMiner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A8EF441A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A8EF451A3412AF008483B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05A8EF471A3412AF008483B4 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		05A8EF491A3412AF008483B4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		05A8EF4B1A3412AF008483B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05A8EF4E1A3412AF008483B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ld31-nev-macTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05A8EF541A3412AF008483B4 /* OverMinerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OverMinerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A8EF591A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ld31_nev_macTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,8 +74,8 @@
 		05A8EF411A3412AF008483B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */,
-				05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */,
+				05A8EF401A3412AF008483B4 /* OverMiner.app */,
+				05A8EF541A3412AF008483B4 /* OverMinerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */ = {
+		05A8EF3F1A3412AF008483B4 /* OverMiner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-mac" */;
+			buildConfigurationList = 05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "OverMiner" */;
 			buildPhases = (
 				05A8EF3C1A3412AF008483B4 /* Sources */,
 				05A8EF3D1A3412AF008483B4 /* Frameworks */,
@@ -136,14 +136,14 @@
 			);
 			dependencies = (
 			);
-			name = "ld31-nev-mac";
+			name = OverMiner;
 			productName = "ld31-nev-mac";
-			productReference = 05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */;
+			productReference = 05A8EF401A3412AF008483B4 /* OverMiner.app */;
 			productType = "com.apple.product-type.application";
 		};
-		05A8EF531A3412AF008483B4 /* ld31-nev-macTests */ = {
+		05A8EF531A3412AF008483B4 /* OverMinerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-macTests" */;
+			buildConfigurationList = 05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "OverMinerTests" */;
 			buildPhases = (
 				05A8EF501A3412AF008483B4 /* Sources */,
 				05A8EF511A3412AF008483B4 /* Frameworks */,
@@ -154,9 +154,9 @@
 			dependencies = (
 				05A8EF561A3412AF008483B4 /* PBXTargetDependency */,
 			);
-			name = "ld31-nev-macTests";
+			name = OverMinerTests;
 			productName = "ld31-nev-macTests";
-			productReference = 05A8EF541A3412AF008483B4 /* ld31-nev-macTests.xctest */;
+			productReference = 05A8EF541A3412AF008483B4 /* OverMinerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -177,7 +177,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "ld31-nev-mac" */;
+			buildConfigurationList = 05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "OverMiner" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -190,8 +190,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */,
-				05A8EF531A3412AF008483B4 /* ld31-nev-macTests */,
+				05A8EF3F1A3412AF008483B4 /* OverMiner */,
+				05A8EF531A3412AF008483B4 /* OverMinerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -242,7 +242,7 @@
 /* Begin PBXTargetDependency section */
 		05A8EF561A3412AF008483B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 05A8EF3F1A3412AF008483B4 /* ld31-nev-mac */;
+			target = 05A8EF3F1A3412AF008483B4 /* OverMiner */;
 			targetProxy = 05A8EF551A3412AF008483B4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -343,7 +343,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "ld31-nev-mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OverMiner;
 			};
 			name = Debug;
 		};
@@ -354,14 +354,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "ld31-nev-mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OverMiner;
 			};
 			name = Release;
 		};
 		05A8EF621A3412AF008483B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -373,15 +372,13 @@
 				);
 				INFOPLIST_FILE = "ld31-nev-macTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ld31-nev-mac.app/Contents/MacOS/ld31-nev-mac";
+				PRODUCT_NAME = OverMinerTests;
 			};
 			name = Debug;
 		};
 		05A8EF631A3412AF008483B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -389,15 +386,14 @@
 				);
 				INFOPLIST_FILE = "ld31-nev-macTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ld31-nev-mac.app/Contents/MacOS/ld31-nev-mac";
+				PRODUCT_NAME = OverMinerTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "ld31-nev-mac" */ = {
+		05A8EF3B1A3412AF008483B4 /* Build configuration list for PBXProject "OverMiner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05A8EF5C1A3412AF008483B4 /* Debug */,
@@ -406,7 +402,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-mac" */ = {
+		05A8EF5E1A3412AF008483B4 /* Build configuration list for PBXNativeTarget "OverMiner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05A8EF5F1A3412AF008483B4 /* Debug */,
@@ -415,7 +411,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "ld31-nev-macTests" */ = {
+		05A8EF611A3412AF008483B4 /* Build configuration list for PBXNativeTarget "OverMinerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05A8EF621A3412AF008483B4 /* Debug */,
