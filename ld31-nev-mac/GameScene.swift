@@ -186,8 +186,10 @@ class Level : SKNode {
 		for datum in layerData {
 			var p = CGPointMake(CGFloat(linearPosition % w), CGFloat(linearPosition/w))
 			p.x -= CGFloat(w)/2
-			p.y -= CGFloat(h)/2
+			p.y = CGFloat(h)/2 - p.y
 			p = p * kGridSize
+			p.x += kGridSize/2
+			p.y -= kGridSize/2
 			
 			var tile : SKNode!
 			switch Tileset(rawValue:datum)! {
@@ -259,7 +261,7 @@ class BuyConveyorTool : Tool {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func perform(game: GameScene, at: CGPoint) {
-		if /*game.level.nodeAtPoint(at) == game.level &&*/ game.buy(10) {
+		if game.level.nodeAtPoint(at) == game.level && game.buy(10) {
 			game.level.addChild(Conveyor(p:at))
 		}
 	}
