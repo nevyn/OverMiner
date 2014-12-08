@@ -165,6 +165,13 @@ class Stone : SKSpriteNode {
 	}
 }
 
+class Mineral : SKSpriteNode {
+	convenience init(p: CGPoint) {
+		self.init(imageNamed: "mineral")
+		self.position = p
+	}
+}
+
 class Level : SKNode {
 	let looks : SKShapeNode
 	init(name: String) {
@@ -200,8 +207,7 @@ class Level : SKNode {
 				case .Stone:
 					tile = Stone(p: p)
 				case .Mineral:
-					tile = Resource(value: 500)
-					tile.position = p
+					tile = Mineral(p: p)
 				case .Exit:
 					tile = Exit()
 					tile.position = p
@@ -235,6 +241,31 @@ class Tool : SKNode {
 	}
 }
 
+
+
+class DigTool : Tool {
+	let looks : SKSpriteNode
+	override init() {
+		looks = SKSpriteNode(imageNamed: "shovel")
+		super.init()
+		self.addChild(looks)
+	}
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+	
+	override func perform(game: GameScene, at: CGPoint) {
+		let hit = game.level.nodeAtPoint(at)
+		let tile1 = hit as? SoftSand
+		let tile2 = hit as? HardSand
+		if tile1 != nil || tile2 != nil {
+			if game.buy(10) {
+				tile1?.removeFromParent()
+				tile2?.removeFromParent()
+			}
+		}
+	}
+}
+
+
 class BuildExtractorTool : Tool {
 	let looks : SKShapeNode
 	override init() {
@@ -245,8 +276,10 @@ class BuildExtractorTool : Tool {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 	
 	override func perform(game: GameScene, at: CGPoint) {
-		if game.buy(50) {
-			game.level.addChild(Extractor(p: at, totalValue: 1000, valuePerResource: 10))
+		if let tile = game.level.nodeAtPoint(at) as? Mineral {
+			if game.buy(100) {
+				game.level.addChild(Extractor(p: at, totalValue: 1000, valuePerResource: 10))
+			}
 		}
 	}
 }
@@ -261,7 +294,7 @@ class BuyConveyorTool : Tool {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func perform(game: GameScene, at: CGPoint) {
-		if game.level.nodeAtPoint(at) == game.level && game.buy(10) {
+		if game.level.nodeAtPoint(at) == game.level.looks && game.buy(10) {
 			game.level.addChild(Conveyor(p:at))
 		}
 	}
@@ -274,6 +307,7 @@ class Toolbar : SKNode {
 		self.game = game
 		super.init()
 		tools = [
+			DigTool(),
 			BuildExtractorTool(),
 			BuyConveyorTool(),
 		]
@@ -285,16 +319,15 @@ class Toolbar : SKNode {
 			pen.x += kGridSize + 9
 		}
 	}
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+	
 	func activeTool() -> Tool {
 		for tool in tools {
 			if tool.active == true {
 				return tool
 			}
 		}
-		fatalError("must be an active tool")
-	}
-	required init?(coder aDecoder: NSCoder) {
-	    fatalError("init(coder:) has not been implemented")
+		fatalError("must have an active tool")
 	}
 	
     func toolbarClick(p: CGPoint) {
@@ -309,7 +342,7 @@ class Toolbar : SKNode {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-	var resources : Int = 200 {
+	var resources : Int = 500 {
 		didSet {
 			resourceLabel.text = "\(resources)"
 		}
@@ -357,11 +390,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			} else if node == level {
 				var pointInLevel = theEvent.locationInNode(self.level)
 				
+                pointInLevel.x += (pointInLevel.x > 0) ? 0 : -(kGridSize)
+                pointInLevel.y += (pointInLevel.y > 0) ? 0 : -(kGridSize)
+
+				
 				let intGridSize = Int(kGridSize)
 				let gridCoordinate = CGPointMake(CGFloat(Int((pointInLevel.x)/kGridSize)), CGFloat(Int((pointInLevel.y)/kGridSize)))
 				let pointAlignedOnGrid = (gridCoordinate*kGridSize) + kGridSize/2
 				
-				println("point: \(pointInLevel) grid coordinate: \(gridCoordinate), point: \(pointAlignedOnGrid)")
+				println("interaction at grid \(pointAlignedOnGrid), hit \(self.level.nodesAtPoint(pointAlignedOnGrid))")
 				
 				toolbar.activeTool().perform(self, at: pointAlignedOnGrid)
 			}
