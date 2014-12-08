@@ -8,6 +8,15 @@ enum Layers : CGFloat {
 	case UI = 100.0
 }
 
+enum Tileset : UInt {
+	case Empty = 1
+	case SoftSand
+	case HardSand
+	case Stone
+	case Mineral
+	case Exit
+}
+
 enum Categories : UInt32 {
 	case Resource = 1
 	case Exit = 2
@@ -135,6 +144,75 @@ class Conveyor : SKNode {
 	}
 }
 
+class SoftSand : SKSpriteNode {
+	convenience init(p: CGPoint) {
+		self.init(imageNamed: "soft_sand")
+		self.position = p
+	}
+}
+
+class HardSand : SKSpriteNode {
+	convenience init(p: CGPoint) {
+		self.init(imageNamed: "hard_sand")
+		self.position = p
+	}
+}
+
+class Stone : SKSpriteNode {
+	convenience init(p: CGPoint) {
+		self.init(imageNamed: "stone")
+		self.position = p
+	}
+}
+
+class Level : SKNode {
+	let looks : SKShapeNode
+	init(name: String) {
+		let levelData = NSData(contentsOfURL: NSBundle.mainBundle().URLForResource(name, withExtension: "json")!)!
+		let object = NSJSONSerialization.JSONObjectWithData(levelData, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
+		let w = object["width"] as Int
+		let h = object["height"] as Int
+		let pixelSize = CGSizeMake(CGFloat(w)*kGridSize, CGFloat(h)*kGridSize)
+		looks = SKShapeNode(rectOfSize: pixelSize)
+		looks.fillColor = SKColor.lightGrayColor()
+		looks.zPosition = Layers.Background.rawValue
+		super.init()
+		self.addChild(looks)
+		
+		let layers = object["layers"] as NSArray
+		let firstLayer = layers[0] as NSDictionary
+		let layerData = firstLayer["data"] as [UInt]
+		var linearPosition = 0
+		for datum in layerData {
+			var p = CGPointMake(CGFloat(linearPosition % w), CGFloat(linearPosition/w))
+			p.x -= CGFloat(w)/2
+			p.y -= CGFloat(h)/2
+			p = p * kGridSize
+			
+			var tile : SKNode!
+			switch Tileset(rawValue:datum)! {
+				case .SoftSand:
+					tile = SoftSand(p: p)
+				case .HardSand:
+					tile = HardSand(p: p)
+				case .Stone:
+					tile = Stone(p: p)
+				case .Mineral:
+					tile = Resource(value: 500)
+					tile.position = p
+				case .Exit:
+					tile = Exit()
+					tile.position = p
+				default: // ignore
+					break
+			}
+			addChild(tile)
+			linearPosition += 1
+		}
+	}
+	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
 class Tool : SKNode {
 	let border = SKShapeNode(rectOfSize: CGSizeMake(kGridSize + 8, kGridSize + 8))
 	var active : Bool = false {
@@ -181,7 +259,7 @@ class BuyConveyorTool : Tool {
 	required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
 	override func perform(game: GameScene, at: CGPoint) {
-		if game.level.nodeAtPoint(at) == game.level && game.buy(10) {
+		if /*game.level.nodeAtPoint(at) == game.level &&*/ game.buy(10) {
 			game.level.addChild(Conveyor(p:at))
 		}
 	}
@@ -246,17 +324,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	var toolbar: Toolbar!
 	let resourceLabel = SKLabelNode(fontNamed: "Superclarendon-Regular")
 	
-	var exit : Exit!
-	
-	let level = SKShapeNode(rectOfSize: CGSizeMake(20*kGridSize, 14*kGridSize))
+	var level : Level!
 	
     override func didMoveToView(view: SKView) {
 		
 		self.backgroundColor = SKColor.blackColor()
 		
-		level.fillColor = SKColor.lightGrayColor()
+		level = Level(name: "levels/level_1")
 		level.position = CGPointMake(self.size.width/2, self.size.height/2 - 0.5*kGridSize)
-		level.zPosition = Layers.Background.rawValue
 		addChild(level)
 		
 		toolbar = Toolbar(game: self)
@@ -267,10 +342,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		resourceLabel.fontSize = 20
 		addChild(resourceLabel)
 		buy(0)
-		
-		exit = Exit()
-		exit.position = CGPointMake(40, 80)
-		self.level.addChild(exit)
 		
 		self.physicsWorld.contactDelegate = self
     }
