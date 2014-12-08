@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		054207CC1A35607000C714B2 /* resourcedeath.sks in Resources */ = {isa = PBXBuildFile; fileRef = 054207CA1A35607000C714B2 /* resourcedeath.sks */; };
+		054207CD1A35607000C714B2 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 054207CB1A35607000C714B2 /* spark.png */; };
 		0575FF531A351C2B00979EFE /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 0575FF521A351C2B00979EFE /* levels */; };
 		05A8EF461A3412AF008483B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF451A3412AF008483B4 /* AppDelegate.swift */; };
 		05A8EF481A3412AF008483B4 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF471A3412AF008483B4 /* GameScene.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		054207CA1A35607000C714B2 /* resourcedeath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = resourcedeath.sks; sourceTree = "<group>"; };
+		054207CB1A35607000C714B2 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		0575FF521A351C2B00979EFE /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		05A8EF401A3412AF008483B4 /* ld31-nev-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ld31-nev-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A8EF441A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				0575FF521A351C2B00979EFE /* levels */,
 				05A8EF451A3412AF008483B4 /* AppDelegate.swift */,
 				05A8EF471A3412AF008483B4 /* GameScene.swift */,
+				054207CA1A35607000C714B2 /* resourcedeath.sks */,
+				054207CB1A35607000C714B2 /* spark.png */,
 				05A8EF491A3412AF008483B4 /* GameScene.sks */,
 				05A8EF4B1A3412AF008483B4 /* Images.xcassets */,
 				05A8EF4D1A3412AF008483B4 /* MainMenu.xib */,
@@ -196,8 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A8EF4A1A3412AF008483B4 /* GameScene.sks in Resources */,
+				054207CD1A35607000C714B2 /* spark.png in Resources */,
 				0575FF531A351C2B00979EFE /* levels in Resources */,
 				05A8EF4C1A3412AF008483B4 /* Images.xcassets in Resources */,
+				054207CC1A35607000C714B2 /* resourcedeath.sks in Resources */,
 				05A8EF4F1A3412AF008483B4 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

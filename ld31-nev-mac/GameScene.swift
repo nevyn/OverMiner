@@ -21,6 +21,7 @@ enum Categories : UInt32 {
 	case Resource = 1
 	case Exit = 2
 	case ResourceDeath = 4
+	case Conveyor = 8
 }
 
 let kGridSize = CGFloat(40.0)
@@ -127,9 +128,10 @@ class Conveyor : SKNode {
 		super.init()
 		self.position = p
 		self.addChild(looks)
-		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2)
+		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2-0.5)
 		self.physicsBody!.affectedByGravity = false
 		self.physicsBody!.pinned = true
+		self.physicsBody!.categoryBitMask = Categories.Conveyor.rawValue
 		self.physicsBody!.friction = 1.0
 		self.zPosition = Layers.World.rawValue
 		
@@ -433,7 +435,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				resources += resource.value
 			} else if other.categoryBitMask & Categories.ResourceDeath.rawValue > 0 {
 				resource.removeFromParent()
-				// play animation
+				
+				let deathAnim = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("resourcedeath", ofType:"sks")!) as SKEmitterNode
+				deathAnim.position = self.convertPoint(contact.contactPoint, toNode: self.level)
+				self.level.addChild(deathAnim)
+				deathAnim.runAction(SKAction.sequence([
+					SKAction.waitForDuration(0.1),
+					SKAction.runBlock({ () -> Void in
+						deathAnim.particleBirthRate = 0
+					}),
+					SKAction.waitForDuration(1.0),
+					SKAction.removeFromParent(),
+				]))
 			}
 		}
 	}
