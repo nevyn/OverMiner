@@ -16,6 +16,7 @@
 		05A8EF4C1A3412AF008483B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A8EF4B1A3412AF008483B4 /* Images.xcassets */; };
 		05A8EF4F1A3412AF008483B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05A8EF4D1A3412AF008483B4 /* MainMenu.xib */; };
 		05A8EF5B1A3412AF008483B4 /* ld31_nev_macTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */; };
+		05BEFAC21A357AC0000A1EB5 /* Todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 05BEFAC11A357AC0000A1EB5 /* Todo.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		05A8EF541A3412AF008483B4 /* OverMinerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OverMinerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A8EF591A3412AF008483B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A8EF5A1A3412AF008483B4 /* ld31_nev_macTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ld31_nev_macTests.swift; sourceTree = "<group>"; };
+		05BEFAC11A357AC0000A1EB5 /* Todo.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		05A8EF421A3412AF008483B4 /* ld31-nev-mac */ = {
 			isa = PBXGroup;
 			children = (
+				05BEFAC11A357AC0000A1EB5 /* Todo.md */,
 				0575FF521A351C2B00979EFE /* levels */,
 				05A8EF451A3412AF008483B4 /* AppDelegate.swift */,
 				05A8EF471A3412AF008483B4 /* GameScene.swift */,
@@ -204,6 +207,7 @@
 				05A8EF4A1A3412AF008483B4 /* GameScene.sks in Resources */,
 				054207CD1A35607000C714B2 /* spark.png in Resources */,
 				0575FF531A351C2B00979EFE /* levels in Resources */,
+				05BEFAC21A357AC0000A1EB5 /* Todo.md in Resources */,
 				05A8EF4C1A3412AF008483B4 /* Images.xcassets in Resources */,
 				054207CC1A35607000C714B2 /* resourcedeath.sks in Resources */,
 				05A8EF4F1A3412AF008483B4 /* MainMenu.xib in Resources */,

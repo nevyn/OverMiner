@@ -1,0 +1,12 @@
+- [ ] Elevator
+- [ ] Sound effects
+- [ ] Resource collection animation
+- [ ] Graphics :P
+- [ ] Be able to clear a level
+		- (set a goal $ value per level, clear it when it's reached)
+- [ ] Switch levels
+		- also restart current level
+- [ ] Menu
+- [ ] iPad support!
+- [ ] Keyboard shortcuts
+- [ ] Mac: Custom cursor
