@@ -58,7 +58,7 @@ class Extractor : SKNode {
 				let newValue = self.totalValue - self.valuePerResource
 				if newValue > 0 {
 					self.totalValue = newValue
-					let resource = Resource(value: self.valuePerResource)
+					let resource = Resource(amount: self.valuePerResource)
 					resource.position = self.position
 					self.parent!.addChild(resource)
 				} else {
@@ -74,12 +74,12 @@ class Extractor : SKNode {
 
 class Resource : SKNode {
 	let looks : SKShapeNode
-	let value : Int
+	let amount : Int
 
-	init(value: Int) {
+	init(amount: Int) {
 		looks = SKShapeNode(rectOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
 		looks.fillColor = SKColor.greenColor()
-		self.value = value
+		self.amount = amount
 		super.init()
 		self.addChild(looks)
 		self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(kGridSize/4, kGridSize/2))
@@ -115,6 +115,40 @@ class Exit : SKNode {
 
 class Conveyor : SKNode {
 	let looks : SKShapeNode
+	class func makeLooks() -> SKShapeNode {
+		let looks = SKShapeNode(circleOfRadius: kGridSize/2)
+		looks.fillColor = SKColor.grayColor()
+		let line = SKShapeNode(rect: CGRectMake(0, 0, kGridSize/2, 1))
+		line.fillColor = SKColor.lightGrayColor()
+		looks.addChild(line)
+		return looks
+	}
+	init(p: CGPoint) {
+		looks = Conveyor.makeLooks()
+		super.init()
+		self.position = p
+		self.addChild(looks)
+		self.physicsBody = SKPhysicsBody(circleOfRadius: kGridSize/2-0.5)
+		self.physicsBody!.affectedByGravity = false
+		self.physicsBody!.pinned = true
+		self.physicsBody!.categoryBitMask = Categories.Conveyor.rawValue
+		self.physicsBody!.friction = 1.0
+		self.zPosition = Layers.World.rawValue
+		
+		self.runAction(SKAction.repeatActionForever(SKAction.sequence([
+			SKAction.runBlock({ () -> Void in
+				self.physicsBody!.angularVelocity = -10
+			}),
+			SKAction.waitForDuration(0.5),
+		])))
+	}
+	required init?(coder aDecoder: NSCoder) {
+	    fatalError("init(coder:) has not been implemented")
+	}
+}
+
+class Elevator : SKNode {
+	let looks: SKShapeNode
 	class func makeLooks() -> SKShapeNode {
 		let looks = SKShapeNode(circleOfRadius: kGridSize/2)
 		looks.fillColor = SKColor.grayColor()
@@ -191,9 +225,9 @@ class Level : SKNode {
 	let looks : SKShapeNode
 	init(name: String) {
 		let levelData = NSData(contentsOfURL: NSBundle.mainBundle().URLForResource(name, withExtension: "json")!)!
-		let object = NSJSONSerialization.JSONObjectWithData(levelData, options: NSJSONReadingOptions(0), error: nil) as NSDictionary
-		let w = object["width"] as Int
-		let h = object["height"] as Int
+		let object = NSJSONSerialization.JSONObjectWithData(levelData, options: NSJSONReadingOptions(0), error: nil) as! NSDictionary
+		let w = object["width"] as! Int
+		let h = object["height"] as! Int
 		let pixelSize = CGSizeMake(CGFloat(w)*kGridSize, CGFloat(h)*kGridSize)
 		looks = SKShapeNode(rectOfSize: pixelSize)
 		looks.fillColor = SKColor.lightGrayColor()
@@ -201,9 +235,9 @@ class Level : SKNode {
 		super.init()
 		self.addChild(looks)
 		
-		let layers = object["layers"] as NSArray
-		let firstLayer = layers[0] as NSDictionary
-		let layerData = firstLayer["data"] as [UInt]
+		let layers = object["layers"] as! NSArray
+		let firstLayer = layers[0] as! NSDictionary
+		let layerData = firstLayer["data"] as! [UInt]
 		var linearPosition = 0
 		for datum in layerData {
 			var p = CGPointMake(CGFloat(linearPosition % w), CGFloat(linearPosition/w))
@@ -401,7 +435,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func mouseDown(theEvent: NSEvent) {
 		let pointInGame = theEvent.locationInNode(self)
-		for node in self.nodesAtPoint(pointInGame) as [SKNode] {
+		for node in self.nodesAtPoint(pointInGame) as! [SKNode] {
 			if let toolbar = node as? Toolbar {
 				toolbar.toolbarClick(theEvent.locationInNode(toolbar))
 				return
@@ -429,14 +463,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		if let (resourceBody, other) = bodyMatchingPredicate(contact.bodyA, contact.bodyB, { (body: SKPhysicsBody) -> Bool in
 			return body.node is Resource
 		}) {
-			let resource = resourceBody.node as Resource
+			let resource = resourceBody.node as! Resource
 			if let exit = other.node as? Exit {
 				resource.removeFromParent()
-				resources += resource.value
+				resources += resource.amount
 			} else if other.categoryBitMask & Categories.ResourceDeath.rawValue > 0 {
 				resource.removeFromParent()
 				
-				let deathAnim = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("resourcedeath", ofType:"sks")!) as SKEmitterNode
+				let deathAnim = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("resourcedeath", ofType:"sks")!) as! SKEmitterNode
 				deathAnim.position = self.convertPoint(contact.contactPoint, toNode: self.level)
 				self.level.addChild(deathAnim)
 				deathAnim.runAction(SKAction.sequence([
